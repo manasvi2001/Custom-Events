@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Change the Color</title>
+	<style type="text/css">
+		.colors {
+			min-width: 200px;
+			max-width: 200px;
+			min-height: 22px;
+			text-align: center;
+		}
+		.colors div {
+			display: inline-block;
+			min-width: 20px;
+			min-height: 20px;
+		}
+		.btn {
+			min-width: 200px;
+			max-width: 200px;
+			min-height: 22px;
+			text-align: center;
+		}
+		#btn-color {
+			background-color: transparent;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div class='colors'>
+		<div id='color1' style="background-color: darkviolet" onclick="clickEvent(1)"></div>
+		<div id='color2' style="background-color: indigo" onclick="clickEvent(2)"></div>
+		<div id='color3' style="background-color: blue" onclick="clickEvent(3)"></div>
+		<div id='color4' style="background-color: lime" onclick="clickEvent(4)"></div>
+		<div id='color5' style="background-color: yellow" onclick="clickEvent(5)"></div>
+		<div id='color6' style="background-color: orange" onclick="clickEvent(6)"></div>
+		<div id='color7' style="background-color: red" onclick="clickEvent(7)"></div>
+	</div>
+	<div class="btn">
+		<button id="btn-color">Change My Color</button>
+	</div>
+	<script type="text/javascript">
+		var myEvent = new CustomEvent("changeColor",{
+			'detail': {
+				'backgroundColor': 'transparent'
+			}
+		});
+		document.getElementById('btn-color').addEventListener("changeColor",doChangeColor,false);
+		function doChangeColor(e) {
+			document.getElementById('btn-color').style.backgroundColor = e.detail.backgroundColor;
+		}
+		function clickEvent(id) {
+			myEvent.detail.backgroundColor = document.getElementById('color'+id).style.backgroundColor;
+			document.getElementById('btn-color').dispatchEvent(myEvent);
+		}
+	</script>
+</body>
+</html>
